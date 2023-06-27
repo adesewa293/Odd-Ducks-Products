@@ -22,11 +22,10 @@ Product.prototype.render = function(){
   const image = document.createElement('img');
   image.src = this.imagePath;
   div.appendChild(image);
-  div.addEventListener('click', this.handleProductClick);
+  div.addEventListener('click', this.handleProductClick.bind(this));
 }
 
 Product.prototype.handleProductClick = function (){
-    // console.log('handleProductClick');
     if (totalVotes < maxVotesAllowed){
       this.voteCount++
       totalVotes++;
@@ -74,11 +73,26 @@ function getRandomProducts(allProducts) {
 
 function renderRandomProducts (){
   const randomProducts = getRandomProducts(allProducts);
-  console.log(randomProducts);
+  // console.log(randomProducts);
   for (const product of randomProducts) {
     product.render();
   }
 }
 renderRandomProducts();
 
-
+const button = document.getElementById('viewResultBtn');
+button.addEventListener('click', function(){
+  console.log(allProducts)
+  const div = document.getElementById('resultContainer');
+  const ul = document.createElement('ul');
+  div.appendChild(ul);
+  for (const product of allProducts) {
+    console.log(product.voteCount)
+    const voteCount = product.voteCount
+    const li = document.createElement('li');
+    li.textContent += `${product.name} was clicked ${voteCount} times`;
+    ul.appendChild(li)
+  }
+  const button2 = document.getElementById('viewResuletBtn');
+  button.style.display = 'none'
+})

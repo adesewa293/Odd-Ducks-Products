@@ -24,3 +24,18 @@ body {
   height: 100%;
   object-fit: cover;
 }
+
+ul {
+  list-style: inside;
+  list-style-type: circle;
+}
+h1{
+  font-size: 50px;
+  text-align: center;
+  background-color: hotpink;
+  margin-bottom: 10px;
+}
+button {
+  margin-top: 20px;
+  width: 20%;
+}
