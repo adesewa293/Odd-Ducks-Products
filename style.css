@@ -3,9 +3,16 @@
   padding: 0;
   box-sizing: border-box;
 }
-
+body {
+  background-color: pink;
+}
 #productContainer {
   display: grid;
-  /* grid-template-columns: 250px 4fr;
-  grid-template-rows: 6.5rem 10rem 20rem 40%; */
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  /* grid-template-rows: 6.5rem 10rem 20rem 40%; */
+  
+  
+  
 }
+
