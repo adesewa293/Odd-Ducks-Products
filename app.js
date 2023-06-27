@@ -17,6 +17,7 @@ function Product(name, imagePath) {
 Product.prototype.render = function(){
   const containerElement = document.getElementById('productContainer')
   const div = document.createElement('div')
+  div.classList.add('object')
   containerElement.appendChild(div);
   const image = document.createElement('img');
   image.src = this.imagePath;
