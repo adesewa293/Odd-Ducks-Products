@@ -10,7 +10,7 @@ const maxVotesAllowed = 25;
 function Product(name, imagePath) {
   this.name = name;
   this.imagePath = imagePath;
-  this.displayCount = 0;
+  this.viewCount = 0;
   this.voteCount = 0;
   allProducts.push(this);
 }
@@ -22,7 +22,9 @@ Product.prototype.render = function(){
   const image = document.createElement('img');
   image.src = this.imagePath;
   div.appendChild(image);
+  this.viewCount++;
   div.addEventListener('click', this.handleProductClick.bind(this));
+  
 }
 
 Product.prototype.handleProductClick = function (){
@@ -82,17 +84,71 @@ renderRandomProducts();
 
 const button = document.getElementById('viewResultBtn');
 button.addEventListener('click', function(){
-  console.log(allProducts)
+  // console.log(allProducts)
   const div = document.getElementById('resultContainer');
   const ul = document.createElement('ul');
   div.appendChild(ul);
   for (const product of allProducts) {
-    console.log(product.voteCount)
+    // console.log(product.voteCount)
     const voteCount = product.voteCount
     const li = document.createElement('li');
     li.textContent += `${product.name} was clicked ${voteCount} times`;
     ul.appendChild(li)
   }
+  chartAppender();
   const button2 = document.getElementById('viewResuletBtn');
   button.style.display = 'none'
 })
+
+
+
+function chartAppender () {
+const allProductsName = []
+for (let i = 0; i < allProducts.length; i++){
+  const productName = allProducts[i].name;
+  allProductsName.push(productName);
+ }
+// console.log(allProductsName)
+
+const allVoteCounts = []
+for (let i = 0; i < allProducts.length; i++) {
+  const vote = allProducts[i].voteCount;
+  // console.log(vote)
+  allVoteCounts.push(vote);
+ 
+}
+// console.log(allVoteCounts)
+const allViewCounts = [];
+for (let i = 0; i < allProducts.length; i++){
+  const viewNumber = allProducts[i].viewCount;
+  allViewCounts.push(viewNumber);
+}
+// console.log(allViewCounts);
+
+const data = {
+  labels: allProductsName,
+  datasets: [
+    {
+      label: "votes",
+      data: allVoteCounts,
+      backgroundColor: ["#42032C"],
+      borderColor: ["#D36B00"],
+      borderWidth: 1,
+    },
+    {
+      label: "views",
+      data: allViewCounts,
+      backgroundColor: ["#D36B00"],
+      borderColor: ["#42032C"],
+      borderWidth: 1,
+    },
+  ],
+};
+const config = {
+  type: "bar",
+  data: data,
+};
+const votesCharts = document.getElementById("chart");
+  const myChart = new Chart(votesCharts, config);
+
+}
