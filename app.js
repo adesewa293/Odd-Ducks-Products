@@ -22,6 +22,7 @@ Product.prototype.render = function () {
   div.appendChild(image);
   this.viewCount++;
   div.addEventListener("click", this.handleProductClick.bind(this));
+  
 };
 
 Product.prototype.handleProductClick = function () {
@@ -33,32 +34,38 @@ Product.prototype.handleProductClick = function () {
     renderRandomProducts();
   }
 };
+function loadProducts () {
+  const bag = new Product("Bag", "images/bag.jpg");
+  const banana = new Product("Banana", "images/banana.jpg");
+  const bathroom = new Product("Bathroom", "images/bathroom.jpg");
+  const boots = new Product("Boots", "images/boots.jpg");
+  const breakfast = new Product("Breakfast", "images/breakfast.jpg");
+  const bubblegum = new Product("Bubblegum", "images/bubblegum.jpg");
+  const chair = new Product("Chair", "images/chair.jpg");
+  const cthulhu = new Product("Cthulhu", "images/cthulhu.jpg");
+  const dogDuck = new Product("Dog-duck", "images/dog-duck.jpg");
+  const dragon = new Product("Dragon", "images/dragon.jpg");
+  const pen = new Product("Pen", "images/pen.jpg");
+  const petSweep = new Product("Pet-sweep", "images/pet-sweep.jpg");
+  const scissors = new Product("Scissors", "images/scissors.jpg");
+  const shark = new Product("Shark", "images/shark.jpg");
+  const sweep = new Product("Sweep", "images/sweep.png");
+  const tauntaun = new Product("tauntaun", "images/tauntaun.jpg");
+  const unicorn = new Product("Unicorn", "images/unicorn.jpg");
+  const waterCan = new Product("Water-can", "images/water-can.jpg");
+  const wineGlass = new Product("Wine-glass", "images/wine-glass.jpg");
 
-const bag = new Product("Bag", "images/bag.jpg");
-const banana = new Product("Banana", "images/banana.jpg");
-const bathroom = new Product("Bathroom", "images/bathroom.jpg");
-const boots = new Product("Boots", "images/boots.jpg");
-const breakfast = new Product("Breakfast", "images/breakfast.jpg");
-const bubblegum = new Product("Bubblegum", "images/bubblegum.jpg");
-const chair = new Product("Chair", "images/chair.jpg");
-const cthulhu = new Product("Cthulhu", "images/cthulhu.jpg");
-const dogDuck = new Product("Dog-duck", "images/dog-duck.jpg");
-const dragon = new Product("Dragon", "images/dragon.jpg");
-const pen = new Product("Pen", "images/pen.jpg");
-const petSweep = new Product("Pet-sweep", "images/pet-sweep.jpg");
-const scissors = new Product("Scissors", "images/scissors.jpg");
-const shark = new Product("Shark", "images/shark.jpg");
-const sweep = new Product("Sweep", "images/sweep.png");
-const tauntaun = new Product("tauntaun", "images/tauntaun.jpg");
-const unicorn = new Product("Unicorn", "images/unicorn.jpg");
-const waterCan = new Product("Water-can", "images/water-can.jpg");
-const wineGlass = new Product("Wine-glass", "images/wine-glass.jpg");
+  localStorage.setItem('allProducts', JSON.stringify(allProducts))
 
-// console.log('allProducts', allProducts);
-
-// function generateImageSelection() {
-//   allProducts
-// }
+}
+const localStoredProducts = JSON.parse(localStorage.getItem('allProducts'));
+if(localStoredProducts) {
+  for (const item of localStoredProducts) {
+    new Product(item.name, item.imagePath)
+  }
+} else {
+  loadProducts();
+}
 
 function getRandomProducts(allProducts) {
   const uniqueProducts = new Set();
